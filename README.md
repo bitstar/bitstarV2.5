@@ -3,6 +3,11 @@ Bitstar
 
 https://bitstarcoin.com
 
+Recommended but not mandatory wallet update, focussed on barterdex compatibility.
+
+**note: wallet.dat is incompatible with V2.0.x.x version due to Berkeley DB Library version used.**
+
+
 What is Bitstar?
 ----------------
 
