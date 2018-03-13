@@ -160,7 +160,7 @@
         <translation>确认加密钱包</translation>
     </message>
     <message>
-        <source>Warning: If you encrypt your wallet and lose your passphrase, you will &lt;b&gt;LOSE ALL OF YOUR BLACKCOINS&lt;/b&gt;!</source>
+        <source>Warning: If you encrypt your wallet and lose your passphrase, you will &lt;b&gt;LOSE ALL OF YOUR BITSTARS&lt;/b&gt;!</source>
         <translation>警告：如果您加密了您的钱包，但是忘记了密码，你将会&lt;b&gt;丢失所有的黑币&lt;/b&gt;！</translation>
     </message>
     <message>
@@ -403,7 +403,7 @@
     </message>
     <message>
         <source>Request payments (generates QR codes and Bitcoin: URIs)</source>
-        <translation>请求支付（生成二维码和 Blackcoin: URI）</translation>
+        <translation>请求支付（生成二维码和 Bitstar: URI）</translation>
     </message>
     <message>
         <source>&amp;About Bitcoin Core</source>
@@ -919,7 +919,7 @@
     </message>
     <message>
         <source>Welcome to Bitcoin Core.</source>
-        <translation>欢迎使用 Blackcoin币核心 程序。</translation>
+        <translation>欢迎使用 Bitstar币核心 程序。</translation>
     </message>
     <message>
         <source>As this is the first time the program is launched, you can choose where Bitcoin Core will store its data.</source>
@@ -2246,7 +2246,7 @@
     </message>
     <message>
         <source>A message that was attached to the Bitcoin: URI which will be stored with the transaction for your reference. Note: This message will not be sent over the Bitcoin network.</source>
-        <translation>Blackcoin:URI 附带的备注信息，将会和交易一起存储，备查。 注意：该消息不会通过黑币网络传输。</translation>
+        <translation>Bitstar:URI 附带的备注信息，将会和交易一起存储，备查。 注意：该消息不会通过黑币网络传输。</translation>
     </message>
     <message>
         <source>Pay To:</source>
@@ -3290,7 +3290,7 @@
     </message>
     <message>
         <source>Copyright (C) 2009-%i The Bitcoin Core Developers</source>
-        <translation>版权所有 (C) 2014-%i Blackcoin Core 开发者</translation>
+        <translation>版权所有 (C) 2014-%i Bitstar Core 开发者</translation>
     </message>
     <message>
         <source>Error loading wallet.dat: Wallet requires newer version of Bitcoin Core</source>

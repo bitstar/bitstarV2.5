@@ -1,4 +1,4 @@
-// Copyright (c) 2014-2016 The BlackCoin Core developers
+// Copyright (c) 2014-2016 The Bitstar Core developers
 // Copyright (c) 2012-2013 The PPCoin developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
@@ -48,7 +48,7 @@ bool CheckStakeBlockTimestamp(int64_t nTimeBlock)
    return CheckCoinStakeTimestamp(nTimeBlock, nTimeBlock);
 }
 
-// BlackCoin kernel protocol v3
+// Bitstar kernel protocol v3
 // coinstake must meet hash target according to the protocol:
 // kernel (input 0) must meet the formula
 //     hash(nStakeModifier + txPrev.nTime + txPrev.vout.hash + txPrev.vout.n + nTime) < bnTarget * nWeight

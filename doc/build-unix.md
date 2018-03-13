@@ -74,7 +74,7 @@ If that doesn't work, you can install all boost development packages with:
 
     sudo apt-get install libboost-all-dev
 
-BerkeleyDB is required for the wallet. db5.3 packages are available [here](https://launchpad.net/~bitcoin/+archive/bitcoin).
+BerkeleyDB is required for the wallet. db6.2.32 packages are available [here](https://launchpad.net/~bitcoin/+archive/bitcoin).
 You can add the repository and install using the following commands:
 
     sudo add-apt-repository ppa:bitcoin/bitcoin
@@ -82,8 +82,8 @@ You can add the repository and install using the following commands:
     sudo apt-get install libdb-dev libdb++-dev
 
 Ubuntu and Debian have their own libdb-dev and libdb++-dev packages, but these will install
-BerkeleyDB 5.3 or later, which break binary wallet compatibility with the distributed executables which
-are based on BerkeleyDB 5.3. If you do not care about wallet compatibility,
+BerkeleyDB 6.2.32 or later, which break binary wallet compatibility with the distributed executables which
+are based on BerkeleyDB 6.2.32. If you do not care about wallet compatibility,
 pass `--with-incompatible-bdb` to configure.
 
 See the section "Disable-wallet mode" to build Bitcoin Core without wallet.
@@ -139,7 +139,7 @@ turned off by default.  See the configure options for upnp behavior desired:
 
 Berkeley DB
 -----------
-It is recommended to use Berkeley DB 4.8. If you have to build it yourself:
+It is recommended to use Berkeley DB 6.2.32. If you have to build it yourself:
 
 ```bash
 BITCOIN_ROOT=$(pwd)
@@ -149,13 +149,13 @@ BDB_PREFIX="${BITCOIN_ROOT}/db4"
 mkdir -p $BDB_PREFIX
 
 # Fetch the source and verify that it is not tampered with
-wget 'http://download.oracle.com/berkeley-db/db-5.3.28.NC.tar.gz'
-echo '76a25560d9e52a198d37a31440fd07632b5f1f8f9f2b6d5438f4bc3e7c9013ef db-5.3.28.NC.tar.gz' | sha256sum -c
-# -> db-5.2.28.NC.tar.gz: OK
-tar -xzvf db-5.3.28.NC.tar.gz
+wget 'http://download.oracle.com/berkeley-db/db-6.2.32.NC.tar.gz'
+echo 'd86cf1283c519d42dd112b4501ecb2db11ae765b37a1bdad8f8cb06b0ffc69b8 db-6.2.32.NC.tar.gz' | sha256sum -c
+# -> db-6.2.32.NC.tar.gz: OK
+tar -xzvf db-6.2.32.NC.tar.gz
 
 # Build the library and install to our prefix
-cd db-5.3.28.NC/build_unix/
+cd db-6.2.32.NC/build_unix/
 #  Note: Do a static build so that it can be embedded into the executable, instead of having to find a .so at runtime
 ../dist/configure --enable-cxx --disable-shared --with-pic --prefix=$BDB_PREFIX
 make install
@@ -233,7 +233,7 @@ disable-wallet mode with:
 
     ./configure --disable-wallet
 
-In this case there is no dependency on Berkeley DB 5.3.
+In this case there is no dependency on Berkeley DB 6.2.32
 
 Mining is also possible in disable-wallet mode, but only using the `getblocktemplate` RPC
 call not `getwork`.

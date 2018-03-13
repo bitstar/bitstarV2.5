@@ -78,11 +78,18 @@ int64_t UpdateTime(CBlock* pblock, const Consensus::Params& consensusParams, con
 }
 
 // miner's coin base reward (POW)
-CAmount GetProofOfWorkReward()
+CAmount GetProofOfWorkReward(int nHeight, int64_t nFees)
 {
-    CAmount nSubsidy = 10000 * COIN;
+    int64_t nSubsidy = 2 * COIN;
 
-    return nSubsidy;
+    if (nHeight == 1)
+    {
+        nSubsidy =  19054512 * COIN;  //coins from bitstar v1 minus batl coinswap
+    }
+
+    LogPrint("creation", "GetProofOfWorkReward() : create=%s nSubsidy=%d\n", FormatMoney(nSubsidy), nSubsidy);
+
+    return nSubsidy + nFees;
 }
 
 int64_t GetMaxTransactionTime(CBlock* pblock)
@@ -306,7 +313,7 @@ CBlockTemplate* CreateNewBlock(const CChainParams& chainparams, const CScript& s
 
         // Compute final coinbase transaction.
 		if (!fProofOfStake) {
-			txNew.vout[0].nValue = nFees +  GetProofOfWorkSubsidy();
+			txNew.vout[0].nValue = nFees +  GetProofOfWorkSubsidy(nHeight);
 			txNew.vin[0].scriptSig = CScript() << nHeight << OP_0;
 			pblocktemplate->vTxFees[0] = -nFees;
 		}
@@ -611,7 +618,7 @@ void ThreadStakeMiner(CWallet *pwallet, const CChainParams& chainparams)
     SetThreadPriority(THREAD_PRIORITY_LOWEST);
 
     // Make this thread recognisable as the mining thread
-    RenameThread("blackcoin-miner");
+    RenameThread("bitstar-miner");
 
     CReserveKey reservekey(pwallet);
 

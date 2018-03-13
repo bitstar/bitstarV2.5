@@ -30,18 +30,17 @@ static arith_uint256 GetTargetLimit(int64_t nTime, bool fProofOfStake, const Con
 
 unsigned int GetNextTargetRequired(const CBlockIndex* pindexLast, const CBlockHeader *pblock, bool fProofOfStake, const Consensus::Params& params)
 {
-	unsigned int nTargetLimit = UintToArith256(params.powLimit).GetCompact();
+    const arith_uint256 nTargetLimit = GetTargetLimit(pindexLast->GetBlockTime(), fProofOfStake, params);
 
 	    // Genesis block
 	    if (pindexLast == NULL)
-	        return nTargetLimit;
-
+	        return nTargetLimit.GetCompact();
 	    const CBlockIndex* pindexPrev = GetLastBlockIndex(pindexLast, fProofOfStake);
 	    if (pindexPrev->pprev == NULL)
-	        return nTargetLimit; // first block
+	        return nTargetLimit.GetCompact(); // first block
 	    const CBlockIndex* pindexPrevPrev = GetLastBlockIndex(pindexPrev->pprev, fProofOfStake);
 	    if (pindexPrevPrev->pprev == NULL)
-	        return nTargetLimit; // second block
+	        return nTargetLimit.GetCompact(); // second block
 
 	return CalculateNextTargetRequired(pindexPrev, pindexPrevPrev->GetBlockTime(), params);
 }

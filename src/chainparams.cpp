@@ -63,8 +63,8 @@ static CBlock CreateGenesisBlock(const char* pszTimestamp, const CScript& genesi
  */
 static CBlock CreateGenesisBlock(uint32_t nTime, uint32_t nNonce, uint32_t nBits, int32_t nVersion, const CAmount& genesisReward)
 {
-    const char* pszTimestamp = "20 Feb 2014 Bitcoin ATMs come to USA";
-    const CScript genesisOutputScript = CScript() << ParseHex("04678afdb0fe5548271967f1a67130b7105cd6a828e03909a67962e0ea1f61deb649f6bc3f4cef38c4f35504e51ec112de5c384df7ba0b8d578a4c702b6bf11d5f") << OP_CHECKSIG;
+    const char* pszTimestamp = "23 aug 2017 Floyd Mayweather v Conor McGregor: Chaos at media event in Las Vegas";
+    const CScript genesisOutputScript = CScript() << ParseHex("04678afdb0fe5548271967f1a67130b7105cd6a828e03909a67962e0ea1f61deb649f6bc3f4cef38c4f35504e51ec112de5c384df7ba0b8d578a4c702b6bf11d5f") << OP_CHECKSIG; //AAM CHECK THIS
     return CreateGenesisBlock(pszTimestamp, genesisOutputScript, nTime, nNonce, nBits, nVersion, genesisReward);
 }
 
@@ -91,8 +91,8 @@ public:
         consensus.posLimit = uint256S("00000fffffffffffffffffffffffffffffffffffffffffffffffffffffffffff");
         consensus.posLimitV2 = uint256S("000000000000ffffffffffffffffffffffffffffffffffffffffffffffffffff");
         consensus.nTargetTimespan = 16 * 60; // 16 mins
-        consensus.nTargetSpacingV1 = 60;
-        consensus.nTargetSpacing = 64;
+        consensus.nTargetSpacingV1 = 30;
+        consensus.nTargetSpacing = 30;
         consensus.BIP34Height = -1;
         consensus.BIP34Hash = uint256();
         consensus.fPowAllowMinDifficultyBlocks = false;
@@ -108,13 +108,13 @@ public:
 //      consensus.vDeployments[Consensus::DEPLOYMENT_CSV].nStartTime = 999999999999ULL; // never
 //      consensus.vDeployments[Consensus::DEPLOYMENT_CSV].nTimeout = 0; // out of time
 
-        consensus.nProtocolV1RetargetingFixedTime = 1395631999;
-        consensus.nProtocolV2Time = 1407053625;
-        consensus.nProtocolV3Time = 1444028400;
+        consensus.nProtocolV1RetargetingFixedTime = 1503468000;
+        consensus.nProtocolV2Time = 1503468000;
+        consensus.nProtocolV3Time = 1503468000;
         consensus.nLastPOWBlock = 10000;
-        consensus.nStakeTimestampMask = 0xf; // 15
-        consensus.nCoinbaseMaturity = 500;
-        consensus.nStakeMinConfirmations = 500;
+        consensus.nStakeTimestampMask = 0xf; // 15   //AAM CHECK THIS
+        consensus.nCoinbaseMaturity = 120;
+        consensus.nStakeMinConfirmations = 120;
         consensus.nStakeMinAge = 8 * 60 * 60; // 8 hours
 
         /**
@@ -122,18 +122,18 @@ public:
          * The characters are rarely used upper ASCII, not valid as UTF-8, and produce
          * a large 32-bit integer with any alignment.
          */
-        pchMessageStart[0] = 0x70;
-        pchMessageStart[1] = 0x35;
-        pchMessageStart[2] = 0x22;
-        pchMessageStart[3] = 0x05;
-        vAlertPubKey = ParseHex("0486bce1bac0d543f104cbff2bd23680056a3b9ea05e1137d2ff90eeb5e08472eb500322593a2cb06fbf8297d7beb6cd30cb90f98153b5b7cce1493749e41e0284");
-        nDefaultPort = 15714;
+        pchMessageStart[0] = 0xce;
+        pchMessageStart[1] = 0xf1;
+        pchMessageStart[2] = 0xdb;
+        pchMessageStart[3] = 0xfa;
+        vAlertPubKey = ParseHex("044a517b6e40a97753077912ae0b7e24c9c27ff4526cd1810dbb0e9fc95f653e4faade8fbe96b2bfd6a69ccc65a85c8ab51e6489cece39125f714bfb5fb6c6e896");
+        nDefaultPort = 19534;
         nMaxTipAge = 24 * 60 * 60;
         nPruneAfterHeight = 100000;
 
-        const char* pszTimestamp = "20 Feb 2014 Bitcoin ATMs come to USA";
+        const char* pszTimestamp = "23 aug 2017 Floyd Mayweather v Conor McGregor: Chaos at media event in Las Vegas";
         CMutableTransaction txNew;
-        txNew.nTime = 1393221600;
+        txNew.nTime = 1503468000;
         txNew.vin.resize(1);
         txNew.vout.resize(1);
         txNew.vin[0].scriptSig = CScript() << 0 << CScriptNum(42) << vector<unsigned char>((const unsigned char*)pszTimestamp, (const unsigned char*)pszTimestamp + strlen(pszTimestamp));
@@ -141,23 +141,25 @@ public:
         genesis.vtx.push_back(txNew);
         genesis.hashPrevBlock.SetNull();
         genesis.nVersion = 1;
-        genesis.nTime    = 1393221600;
-        genesis.nBits    = 0x1e0fffff;
-        genesis.nNonce = 164482;
+        genesis.nTime    = 1503468000;
+        genesis.nBits    = 0x1e0fffff; //AAM CHECK THIS
+        genesis.nNonce = 1294527;
         genesis.hashMerkleRoot = BlockMerkleRoot(genesis);
         consensus.hashGenesisBlock = genesis.GetHash();
-        assert(consensus.hashGenesisBlock == uint256S("0x000001faef25dec4fbcf906e6242621df2c183bf232f263d0ba5b101911e4563"));
-        assert(genesis.hashMerkleRoot == uint256S("0x12630d16a97f24b287c8c2594dda5fb98c9e6c70fc61d44191931ea2aa08dc90"));
+        assert(consensus.hashGenesisBlock == uint256S("0x00000a070895a3179065b7c8aa1ca794b2e5a06db5bec55b964ac495985085fd"));
+        assert(genesis.hashMerkleRoot == uint256S("0x10b19e6c172f259d81cb2935e10033dd70e4eebad00d104a7807d1a09599c51e"));
 
-        vSeeds.push_back(CDNSSeedData("vasin.nl", "dnsseed.vasin.nl"));
-        vSeeds.push_back(CDNSSeedData("vps.joshuajbouw.com", "dnsseed.joshuajbouw.com"));
+        vSeeds.push_back(CDNSSeedData("seed.bitstarcoin.com", "seed.bitstarcoin.com"));
+        vSeeds.push_back(CDNSSeedData("seed2.bitstarcoin.com", "seed2.bitstarcoin.com"));
+        vSeeds.push_back(CDNSSeedData("seed3.bitstarcoin.com", "seed3.bitstarcoin.com"));
+        vSeeds.push_back(CDNSSeedData("seed4.bitstarcoin.com", "seed4.bitstarcoin.com"));
 
         base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1,25);
-        base58Prefixes[SCRIPT_ADDRESS] = std::vector<unsigned char>(1,85);
+        base58Prefixes[SCRIPT_ADDRESS] = std::vector<unsigned char>(1,8);
         base58Prefixes[SECRET_KEY] = std::vector<unsigned char>(1,153);
         base58Prefixes[EXT_PUBLIC_KEY] = boost::assign::list_of(0x04)(0x88)(0xB2)(0x1E).convert_to_container<std::vector<unsigned char> >();
         base58Prefixes[EXT_SECRET_KEY] = boost::assign::list_of(0x04)(0x88)(0xAD)(0xE4).convert_to_container<std::vector<unsigned char> >();
-        cashaddrPrefix = "blackcoin";
+        cashaddrPrefix = "bitstarcoin";
 
         vFixedSeeds = std::vector<SeedSpec6>(pnSeed6_main, pnSeed6_main + ARRAYLEN(pnSeed6_main));
 
@@ -169,16 +171,11 @@ public:
 
         checkpointData = (CCheckpointData) {
                     boost::assign::map_list_of
-                    (  5001, uint256S("0x2fac9021be0c311e7b6dc0933a72047c70f817e2eb1e01bede011193ad1b28bc"))  // hardfork
-                    ( 10000, uint256S("0x0000000000827e4dc601f7310a91c45af8df0dfc1b6fa1dfa5b896cb00c8767c"))  // last pow block
-                    ( 38425, uint256S("0x62bf2e9701226d2f88d9fa99d650bd81f3faf2e56f305b7d71ccd1e7aa9c3075"))  // hardfork
-                    (254348, uint256S("0x9bf8d9bd757d3ef23d5906d70567e5f0da93f1e0376588c8d421a95e2421838b"))  // minor network split
-                    (319002, uint256S("0x0011494d03b2cdf1ecfc8b0818f1e0ef7ee1d9e9b3d1279c10d35456bc3899ef"))  // hardfork
-                    (872456, uint256S("0xe4fd321ced1de06213d2e246b150b4bfd8c4aa0989965dce88f2a58668c64860")), // hardfork
-                    1444028528, // * UNIX timestamp of last checkpoint block
-                    2774767,    // * total number of transactions between genesis and last checkpoint
+                    ( 10000, uint256S("105f65275c8e6c14c1edac4d7bb6ab1da1dc07a09cbd450957f2d35118c1b2fc")),  // last pow block
+                    1518010642, // * UNIX timestamp of last checkpoint block
+                    10000,    // * total number of transactions between genesis and last checkpoint
                                 //   (the tx=... number in the SetBestChain debug.log lines)
-                    3500.0      // * estimated number of transactions per day after checkpoint
+                    2880.0      // * estimated number of transactions per day after checkpoint
         };
     }
 };
@@ -220,19 +217,19 @@ public:
         consensus.nStakeMinConfirmations = 50;
         consensus.nStakeMinAge = 1 * 60 * 60; // 1 hour
 
-        pchMessageStart[0] = 0xcd;
-        pchMessageStart[1] = 0xf2;
-        pchMessageStart[2] = 0xc0;
-        pchMessageStart[3] = 0xef;
-        vAlertPubKey = ParseHex("0471dc165db490094d35cde15b1f5d755fa6ad6f2b5ed0f340e3f17f57389c3c2af113a8cbcc885bde73305a553b5640c83021128008ddf882e856336269080496");
-        nDefaultPort = 25714;
+        pchMessageStart[0] = 0xce;
+        pchMessageStart[1] = 0xf1;
+        pchMessageStart[2] = 0xdb;
+        pchMessageStart[3] = 0xfa;
+        vAlertPubKey = ParseHex("049df4f51a6e93667687d26277555954eed8a2dc7f1a6fce2d0976aa394bceb1348e39ff53a9f79186695d9fc95ffb7244b2aef57573519554e8d023a8c2129a00");
+        nDefaultPort = 29534;
         nMaxTipAge = 0x7fffffff;
         nPruneAfterHeight = 1000;
 
-        genesis = CreateGenesisBlock(1393221600, 216178, 0x1f00ffff, 1, 0);
+        genesis = CreateGenesisBlock(1503468000, 233903, 0x1f00ffff, 1, 0);
         consensus.hashGenesisBlock = genesis.GetHash();
-        assert(consensus.hashGenesisBlock == uint256S("0x0000724595fb3b9609d441cbfb9577615c292abf07d996d3edabc48de843642d"));
-        assert(genesis.hashMerkleRoot == uint256S("0x12630d16a97f24b287c8c2594dda5fb98c9e6c70fc61d44191931ea2aa08dc90"));
+        assert(consensus.hashGenesisBlock == uint256S("0x0000cdea654056f131dc28e7631ac9e6128d04ad41ac38f87f53cc3a5efcf500"));
+        assert(genesis.hashMerkleRoot == uint256S("0x10b19e6c172f259d81cb2935e10033dd70e4eebad00d104a7807d1a09599c51e"));
 
         vFixedSeeds.clear();
         vSeeds.clear();
@@ -254,7 +251,7 @@ public:
 
         checkpointData = (CCheckpointData) {
             boost::assign::map_list_of
-            ( 0, uint256S("0x0000724595fb3b9609d441cbfb9577615c292abf07d996d3edabc48de843642d")),
+            ( 0, uint256S("0x0000cdea654056f131dc28e7631ac9e6128d04ad41ac38f87f53cc3a5efcf500")),
             0,
             0,
             0
@@ -312,7 +309,7 @@ public:
         pchMessageStart[2] = 0x22;
         pchMessageStart[3] = 0x06;
         vAlertPubKey = ParseHex("042508124261e3c969d9b4988349c41a329c6979e446facffc3227e16e5420c366e7d917e8ef80e70a27b90582272c93b6d0f16b0c728b970f73478167729cbbea");
-        nDefaultPort = 25714;
+        nDefaultPort = 39534;
         nMaxTipAge = 0x7fffffff;
         nPruneAfterHeight = 100000;
 

@@ -666,9 +666,9 @@ int64_t GetProofOfStakeReward(const CBlockIndex* pindexPrev, int64_t nCoinAge, i
 {
     int64_t nSubsidy;
     if (Params().GetConsensus().IsProtocolV3(pindexPrev->nTime))
-        nSubsidy = COIN * 3 / 2;
+        nSubsidy = COIN * 1;
     else
-        nSubsidy = nCoinAge * 1 * CENT * 33 / (365 * 33 + 8);
+        nSubsidy = COIN * 1;
 
     LogPrint("creation", "GetProofOfStakeReward(): create=%s nCoinAge=%d\n", FormatMoney(nSubsidy), nCoinAge);
 

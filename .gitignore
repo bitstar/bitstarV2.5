@@ -1,12 +1,17 @@
 *.tar.gz
 
 *.exe
-src/bitcoin
-src/bitcoind
-src/bitcoin-cli
-src/bitcoin-tx
+src/bitstar
+src/bitstard
+src/bitstar-cli
+src/bitstar-tx
 src/test/test_bitcoin
 src/qt/test/test_bitcoin-qt
+
+db4/
+db-6.2.32.NC/
+*.tar.gz
+.idea/
 
 # autoreconf
 Makefile.in

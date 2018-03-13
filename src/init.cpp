@@ -475,14 +475,14 @@ std::string HelpMessage(HelpMessageMode mode)
 
 std::string LicenseInfo()
 {
-    const std::string URL_SOURCE_CODE = "<https://github.com/janko33bd/bitcoin>";
-    const std::string URL_WEBSITE = "<http://blackcoin.co/>";
+    const std::string URL_SOURCE_CODE = "<https://github.com/bitstar/bitstarV2.5>";
+    const std::string URL_WEBSITE = "<http://bitstarcoin.com/>";
     // todo: remove urls from translations on next change
     return FormatParagraph(strprintf(_("Copyright (C) 2009-%i The Bitcoin Core Developers"), COPYRIGHT_YEAR)) + "\n" +
            "\n" +
-           FormatParagraph(strprintf(_("Copyright (C) 2014-%i The Blackcoin Lore Developers"), COPYRIGHT_YEAR)) + "\n" +
+           FormatParagraph(strprintf(_("Copyright (C) 2014-%i The Bitstar Developers"), COPYRIGHT_YEAR)) + "\n" +
            "\n" +
-           FormatParagraph(strprintf(_("Please contribute if you find Blackcoin Lore useful. "
+           FormatParagraph(strprintf(_("Please contribute if you find Bitstar useful. "
                        "Visit %s for further information about the software."),
                URL_WEBSITE)) +
            "\n" +
@@ -567,7 +567,7 @@ void CleanupBlockRevFiles()
 void ThreadImport(std::vector<boost::filesystem::path> vImportFiles)
 {
     const CChainParams& chainparams = Params();
-    RenameThread("bitcoin-loadblk");
+    RenameThread("bitstar-loadblk");
     CImportingNow imp;
 
     // -reindex

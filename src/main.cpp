@@ -115,7 +115,7 @@ static void CheckBlockIndex(const Consensus::Params& consensusParams);
 /** Constant stuff for coinbase transactions we create: */
 CScript COINBASE_FLAGS;
 
-const string strMessageMagic = "BlackCoin Signed Message:\n";
+const string strMessageMagic = "Bitstar Signed Message:\n";
 
 // Internal stuff
 namespace {
@@ -1735,14 +1735,19 @@ bool ReadFromDisk(CTransaction& tx, CDiskTxPos& txindex)
     return true;
 }
 
-CAmount GetProofOfWorkSubsidy()
+CAmount GetProofOfWorkSubsidy(int nHeight)
 {
-	return 10000 * COIN;
+    if (nHeight == 1)
+    {
+        return 19054512 * COIN;  //coins from bitstar v1 minus batl coinswap
+    }	
+
+	return 2 * COIN;
 }
 
 CAmount GetProofOfStakeSubsidy()
 {
-    return COIN * 3 / 2;
+    return 1 * COIN;
 }
 
 bool IsInitialBlockDownload()
@@ -2696,9 +2701,9 @@ bool ConnectBlock(const CBlock& block, CValidationState& state, CBlockIndex* pin
 
     // BIP66 is always active
     flags |= SCRIPT_VERIFY_DERSIG;
-    // BlackCoin also requires DER encoding of pubkeys
+    // Bitstar also requires DER encoding of pubkeys
     flags |= SCRIPT_VERIFY_DERKEY;
-    // BlackCoin also requires low S in sigs
+    // Bitstar also requires low S in sigs
     flags |= SCRIPT_VERIFY_LOW_S;
 
     // Start enforcing CHECKLOCKTIMEVERIFY, (BIP65) since protocol v3
@@ -2871,7 +2876,7 @@ bool ConnectBlock(const CBlock& block, CValidationState& state, CBlockIndex* pin
     LogPrint("bench", "      - Connect %u transactions: %.2fms (%.3fms/tx, %.3fms/txin) [%.2fs]\n", (unsigned)block.vtx.size(), 0.001 * (nTime3 - nTime2), 0.001 * (nTime3 - nTime2) / block.vtx.size(), nInputs <= 1 ? 0 : 0.001 * (nTime3 - nTime2) / (nInputs-1), nTimeConnect * 0.000001);
 
     if (block.IsProofOfWork()) {
-            CAmount blockReward = nFees + GetProofOfWorkSubsidy();
+            CAmount blockReward = nFees + GetProofOfWorkSubsidy(pindex->nHeight);
             if (block.vtx[0].GetValueOut() > blockReward)
                 return state.DoS(100,
                                  error("ConnectBlock(): coinbase pays too much (actual=%d vs limit=%d)",

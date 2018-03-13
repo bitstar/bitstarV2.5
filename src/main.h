@@ -188,7 +188,7 @@ extern uint64_t nPruneTarget;
 static const unsigned int MIN_BLOCKS_TO_KEEP = 500;
 
 static const signed int DEFAULT_CHECKBLOCKS = MIN_BLOCKS_TO_KEEP;
-static const unsigned int DEFAULT_CHECKLEVEL = 3;
+static const unsigned int DEFAULT_CHECKLEVEL = 2;
 
 // Require that user allocate at least 550MB for block & undo files (blk???.dat and rev???.dat)
 // At 1MB per block, 288 blocks = 288MB.
@@ -260,7 +260,7 @@ std::string GetWarnings(const std::string& strFor);
 bool GetTransaction(const uint256 &hash, CTransaction &tx, const Consensus::Params& params, uint256 &hashBlock, bool fAllowSlow = false);
 /** Find the best known block, and make it the tip of the block chain */
 bool ActivateBestChain(CValidationState& state, const CChainParams& chainparams, const CBlock* pblock = NULL, const uint256 *phash = NULL);
-CAmount GetProofOfWorkSubsidy();
+CAmount GetProofOfWorkSubsidy(int nHeight);
 CAmount GetProofOfStakeSubsidy();
 
 /**

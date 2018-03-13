@@ -99,8 +99,8 @@ namespace boost {
 
 using namespace std;
 
-const char * const BITCOIN_CONF_FILENAME = "lore.conf";
-const char * const BITCOIN_PID_FILENAME = "lored.pid";
+const char * const BITCOIN_CONF_FILENAME = "bitstar.conf";
+const char * const BITCOIN_PID_FILENAME = "bitstard.pid";
 
 map<string, string> mapArgs;
 map<string, vector<string> > mapMultiArgs;
@@ -435,7 +435,7 @@ static std::string FormatException(const std::exception* pex, const char* pszThr
     char pszModule[MAX_PATH] = "";
     GetModuleFileNameA(NULL, pszModule, sizeof(pszModule));
 #else
-    const char* pszModule = "blackcoin";
+    const char* pszModule = "bitstar";
 #endif
     if (pex)
         return strprintf(
@@ -461,7 +461,7 @@ boost::filesystem::path GetDefaultDataDir()
     // Unix: ~/.bitcoin
 #ifdef WIN32
     // Windows
-    return GetSpecialFolderPath(CSIDL_APPDATA) / "Lore";
+    return GetSpecialFolderPath(CSIDL_APPDATA) / "Bitstar_2.5";
 #else
     fs::path pathRet;
     char* pszHome = getenv("HOME");
@@ -473,10 +473,10 @@ boost::filesystem::path GetDefaultDataDir()
     // Mac
     pathRet /= "Library/Application Support";
     TryCreateDirectory(pathRet);
-    return pathRet / "Lore";
+    return pathRet / "Bitstar_2.5";
 #else
     // Unix
-    return pathRet / ".lore";
+    return pathRet / ".bitstar_2.5";
 #endif
 #endif
 }
