@@ -461,7 +461,7 @@ boost::filesystem::path GetDefaultDataDir()
     // Unix: ~/.bitcoin
 #ifdef WIN32
     // Windows
-    return GetSpecialFolderPath(CSIDL_APPDATA) / "Bitstar_2.5";
+    return GetSpecialFolderPath(CSIDL_APPDATA) / "Bitstar";
 #else
     fs::path pathRet;
     char* pszHome = getenv("HOME");
@@ -473,10 +473,10 @@ boost::filesystem::path GetDefaultDataDir()
     // Mac
     pathRet /= "Library/Application Support";
     TryCreateDirectory(pathRet);
-    return pathRet / "Bitstar_2.5";
+    return pathRet / "Bitstar";
 #else
     // Unix
-    return pathRet / ".bitstar_2.5";
+    return pathRet / ".bitstar";
 #endif
 #endif
 }
